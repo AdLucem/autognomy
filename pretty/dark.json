@@ -1,0 +1,10 @@
+{	
+	"wallpaper": "Pictures/smile_to_protect.png",
+	"gtk-theme": "Sweet-Mars",
+	"shell-theme": "Flat-Remix-Miami-Dark",
+	"icon-theme": "Ubuntu-mono-dark",
+	"sublime-theme": "Freesia.sublime-theme",
+	"color-scheme" : "Packages/Theme - Freesia/Triplet.tmTheme",
+	"custom-pairs" : [{"key" : "freesia_soft_tab_marker", "value" : "true"},
+        			  {"key" : "highlight_modified_tabs", "value" : "true"}]
+}

@@ -1,0 +1,9 @@
+{	
+	"wallpaper": "Pictures/white_bloody.jpg",
+	"gtk-theme": "Arc",
+	"shell-theme": "Arc",
+	"icon-theme": "HighContrast",
+	"sublime-theme": "Spacegray Light.sublime-theme",
+	"color-scheme" : "Packages/Theme - Spacegray/base16-ocean.light.tmTheme",
+	"custom-pairs" : [{"key": "spacegray_tabs_font_xlarge", "value": "true"}, {"key": "spacegray_tabs_xlarge", "value": "true"}]
+}

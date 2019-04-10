@@ -1,6 +1,7 @@
 module Main where
 
+{-# LANGUAGE OverloadedStrings #-}
+
 import Lib
 
-main :: IO ()
-main = putStrLn "Autognomy TODO"
+main = helloWorld 
