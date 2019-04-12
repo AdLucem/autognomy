@@ -34,3 +34,7 @@ instance FromJSON SublimeAesthetic where
             SublimeAesthetic <$> v .: "sublime-theme"
                              <*> v .: "color-scheme"
                              <*> v .: "custom-pairs"
+
+
+instance Aesthetic SublimeAesthetic where
+    isCorrect aes = True

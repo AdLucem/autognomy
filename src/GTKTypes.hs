@@ -24,3 +24,7 @@ instance FromJSON GTKAesthetic where
                          <*> v .: "gtk-theme"
                          <*> v .: "shell-theme"
                          <*> v .: "icon-theme"
+
+
+instance Aesthetic GTKAesthetic where
+    isCorrect aes = True

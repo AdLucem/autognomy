@@ -8,13 +8,8 @@ module Types (
 import Data.Aeson
 import qualified GTKTypes
 import qualified SublimeTypes
+import Aesthetic
 
 type GTKAesthetic = GTKTypes.GTKAesthetic
 
---instance Aesthetic GTKAesthetic where
---    readAesthetic aes = eitherDecode aes
-
 type SublimeAesthetic = SublimeTypes.SublimeAesthetic
-
---instance Aesthetic SublimeAesthetic where
---    readAesthetic aes = eitherDecode aes

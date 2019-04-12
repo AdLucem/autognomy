@@ -14,14 +14,17 @@ import Aesthetic
 jsonFile :: FilePath
 jsonFile = "pretty/pure.json"
 
-getData :: IO B.ByteString
-getData = B.readFile jsonFile
+getData :: FilePath -> IO B.ByteString
+getData jsonFile = B.readFile jsonFile
 
-helloWorld :: IO ()
-helloWorld = do
-    d <- getData
-    gtk  <- readAesthetic d
-    subl <- readAesthetic d
+parseAesthetic :: Aesthetic a => B.ByteString -> Either String a
+parseAesthetic d = eitherDecode d
+
+readAesthetic :: Aesthetic a => IO [a]
+parseAesthetic aesFile = do
+        d <- getData aesFile
+    let gtk = (readAesthetic d) :: Either String GTKAesthetic
+    let subl = (readAesthetic d) :: Either String SublimeAesthetic
     case gtk of
         Left err -> putStrLn err
         Right dat -> print dat
