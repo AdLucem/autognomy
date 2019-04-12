@@ -4,6 +4,8 @@ module SublimeTypes where
 
 import Data.Aeson
 
+import Aesthetic
+
 data CustomPair =
     CustomPair
     {
@@ -19,7 +21,7 @@ instance FromJSON CustomPair where
 
 
 data SublimeAesthetic =
-    SublimeAesthetic 
+    SublimeAesthetic
     {
         sublTheme :: String,
         colorScheme :: String,

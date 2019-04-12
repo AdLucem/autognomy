@@ -3,10 +3,13 @@
 module GTKTypes where
 
 import Data.Aeson
+import qualified Data.ByteString.Lazy as T
+
+import Aesthetic
 
 
-data GTKAesthetic = 
-    GTKAesthetic 
+data GTKAesthetic =
+    GTKAesthetic
     {
         wallpaper :: String,
         gtkTheme :: String,
