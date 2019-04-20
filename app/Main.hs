@@ -2,6 +2,6 @@ module Main where
 
 {-# LANGUAGE OverloadedStrings #-}
 
-import Lib
+import AestheticAPI
 
-main = helloWorld 
+main = loadAesthetic "pretty/pure.json"
