@@ -26,8 +26,17 @@ loadAesthetic aesFile = do
     case gtk of
         Left err -> putStrLn err
         Right dat -> do
-            res <- changeWallpaper dat  
-            putStrLn $ "Wallpaper successfully changed"
-            print $ T.lineToText res
+            let resWall = changeWallpaper dat
+            putStrLn "Wallpaper changing..."
+            T.stdout resWall
+            let resTheme = changeGTKTheme dat
+            putStrLn "GTK theme changing..."
+            T.stdout resTheme
+            let resShell = changeShellTheme dat
+            putStrLn "Shell theme changing..."
+            T.stdout resShell 
+            let resIcon = changeIconTheme dat
+            putStrLn "Icon theme changing..." 
+            T.stdout resIcon
 
 
