@@ -11,11 +11,13 @@ Each "aesthetic"- your desktop look- should be defined as a JSON file, that curr
 
 The application only works if you have the themes, icon themes et cetera already on your PC- the assumption is that you have a bunch of predefined "looks", defined in the `aesthetic` files, and the application allows you to change between looks at a single click.
 
+Example aesthetics are in [./pretty/](./pretty)
+
 ## Usage
 
 ```bash
 $ ./build.sh
-$ ./autognomy <path-to-json-file>
+$ ./autognomy.sh <path-to-json-file>
 ``` 
 
 ## Development

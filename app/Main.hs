@@ -1,7 +1,10 @@
-module Main where
 
 {-# LANGUAGE OverloadedStrings #-}
 
+module Main where
+
 import AestheticAPI
 
-main = loadAesthetic "pretty/dark.json"
+main = do
+	fname <- getLine
+	loadAesthetic fname
