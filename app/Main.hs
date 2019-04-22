@@ -4,4 +4,4 @@ module Main where
 
 import AestheticAPI
 
-main = loadAesthetic "pretty/pure.json"
+main = loadAesthetic "pretty/dark.json"
