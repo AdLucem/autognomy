@@ -4,25 +4,23 @@ module AestheticAPI
     ( loadAesthetic
     ) where
 
+-- library imports
 import qualified Turtle as T
 import qualified Data.ByteString.Lazy as B
 import Data.Aeson
 
+-- local imports
 import Types
 import Aesthetic
 import GTKApply
+import DataLoader
 
-getData :: FilePath -> IO B.ByteString
-getData jsonFile = B.readFile jsonFile
 
-parseAesthetic :: Aesthetic a => B.ByteString -> Either String a
-parseAesthetic d = eitherDecode d
-
+-- | reads in an Aesthetic and applies it to the system 
 loadAesthetic :: FilePath -> IO ()
 loadAesthetic aesFile = do
     d <- getData aesFile
     let gtk = (parseAesthetic d) :: Either String GTKAesthetic
---    let subl = (parseAesthetic d) :: Either String SublimeAesthetic
     case gtk of
         Left err -> putStrLn err
         Right dat -> do

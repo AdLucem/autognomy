@@ -19,6 +19,7 @@ library
                      , src/Aesthetic/Core
                      , src/Aesthetic/Types
   exposed-modules:     AestheticAPI
+                     , DataLoader
                      , Types
                      , GTKTypes
                      , SublimeTypes
