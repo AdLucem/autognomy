@@ -14,6 +14,6 @@ import Aesthetic
 getData :: FilePath -> IO B.ByteString
 getData jsonFile = B.readFile jsonFile
 
--- | parses the raw string into either an error string
+-- | parses the raw string into either an aesthetic or an error string
 parseAesthetic :: Aesthetic a => B.ByteString -> Either String a
 parseAesthetic d = eitherDecode d
