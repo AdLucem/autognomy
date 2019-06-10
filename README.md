@@ -19,11 +19,3 @@ Example aesthetics are in [./pretty/](./pretty)
 $ ./build.sh
 $ ./autognomy.sh <path-to-json-file>
 ``` 
-
-## Development
-
-* I'm currently working on getting sublime text, vim and emacs aesthetics up.
-* I'm also trying to get it to auto-download themes, icon-themes etc. when these are not already installed in the system.
-* Fuzzy-matching for theme and wallpaper names might be useful.
-
-[Here's the github link for the project. Contributions are welcome!](https://github.com/AdLucem)
