@@ -1,4 +1,4 @@
-name:                autognomy
+name:                hashtag-aesthetic
 version:             0.1.0.0
 -- synopsis:
 -- description:
@@ -32,7 +32,7 @@ library
                      , text
   default-language:    Haskell2010
 
-executable autognomy-exe
+executable hashtag-aesthetic
   hs-source-dirs:      app
   main-is:             Main.hs
   ghc-options:         -threaded -rtsopts -with-rtsopts=-N
@@ -40,7 +40,7 @@ executable autognomy-exe
                      , autognomy
   default-language:    Haskell2010
 
-test-suite autognomy-test
+test-suite hashtag-aesthetic-test
   type:                exitcode-stdio-1.0
   hs-source-dirs:      test
   main-is:             Spec.hs
