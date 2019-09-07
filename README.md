@@ -21,7 +21,7 @@ Example aesthetics are in [./pretty/](./pretty)
 
 ```bash
 $ ./build.sh
-$ ./autognomy.sh <path-to-json-file>
+$ ./aesthetic.sh <path-to-json-file>
 ```
 
 ## project-manager
