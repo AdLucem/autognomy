@@ -1,3 +1,3 @@
 #!/bin/bash
 
-stack build autognomy
+cabal new-build all
