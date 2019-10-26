@@ -8,12 +8,20 @@ import System.IO
 import Text.Printf
 
 
+joinPath :: FilePath -> FilePath -> FilePath
+joinPath root filename = root ++ "/" ++ filename
+
+
 isGitRepo :: FilePath -> IO Bool
 isGitRepo dir = do
     dirContents <- listDirectory dir
     return $ ".git" `elem` dirContents
 
 
+isNotDotFile :: FilePath -> Bool
+isNotDotFile filename = not ('.' `elem` filename)
+
+{-
 listAllRepos :: FilePath -> IO ([FilePath])
 listAllRepos root = do
     isItAGitRepo <- isGitRepo root
@@ -29,6 +37,33 @@ listAllRepos root = do
                 otherwise -> do
                     rec <- mapM listAllRepos subdirs
                     return $ [] ++ (concat rec)
+-}
+
+listAllRepos :: Int -> Int -> FilePath -> IO ([FilePath])
+listAllRepos maxdepth depth root = do
+    let depthExceeded = depth >= maxdepth
+    isRepo <- isGitRepo root
+    case (depthExceeded || isRepo) of
+        -- if either recursion depth is exceeded, or file is a repo
+        -- then stop recursing
+        True -> return [root]
+        -- else recurse
+        False -> do
+            -- get the subdirectories of the directory
+            -- that are not dotfile directories
+            dirContents  <- listDirectory root
+            maybeSubdirs <- filterM
+                            doesDirectoryExist
+                            (map (joinPath root) dirContents)
+            let subdirs = filter isNotDotFile maybeSubdirs 
+            case subdirs of
+                -- if no subdirectories, then stop recursing
+                [] -> return []
+                -- else if there are subdirectories
+                otherwise -> do
+                    -- get the subdirectories within it, adding one recursion level
+                    recSubdirs <- mapM (listAllRepos maxdepth (depth + 1)) subdirs
+                    return $ [] ++ (concat recSubdirs)
 
 
 getService :: String -> String
@@ -96,12 +131,19 @@ showAsTable repos services usernames =
       showCell x y z = printf "%-50s %-9s %s\n" x y z
 
 
-main :: IO ()
-main = do
+showProjects :: IO ()
+showProjects = do
     home <- getHomeDirectory
-    dirs <- listAllRepos home
+    dirs <- listAllRepos 10 0 home
     repos <- mapM findRepoName dirs
     users <- mapM findUserName dirs
     serv <- mapM findServiceName dirs
     putStrLn $ showAsTable repos serv users
-    -- putStrLn $ showAsTable repo ser user
+
+
+main = do
+    putStrLn "Enter command "
+    cmd <- getLine
+    case cmd of
+        "show" -> showProjects
+        otherwise -> putStrLn "Command not found."
