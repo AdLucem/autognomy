@@ -1,0 +1,23 @@
+ ubuntu-release-upgrader-gtk
+ update-manager-core
+ python3-certbot-apache
+ apport-gtk
+ ubuntu-release-upgrader-core
+ python3-apport
+ ibus
+ update-notifier
+ aptdaemon
+ gedit
+ apport
+ update-manager
+ language-selector-gnome
+ dh-python
+ ibus-table
+ python3-aptdaemon
+ python3-aptdaemon.gtk3widgets
+ apturl
+ software-properties-gtk
+ python3-distupgrade
+ python3-update-manager
+ apturl-common
+
