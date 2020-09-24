@@ -1,0 +1,22 @@
+# shell usage basics
+tree
+curl
+sshfs
+tmux
+
+# programming languages
+python3
+nodejs
+
+# programming tools
+virtualenv
+python3-pip
+
+# customization
+chrome-gnome-shell
+gnome-tweak-tool
+lolcat
+
+# epub/other formats file reader
+fbreader
+                 

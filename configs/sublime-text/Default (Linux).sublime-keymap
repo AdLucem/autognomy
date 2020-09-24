@@ -1,0 +1,47 @@
+[
+	// window commands
+	{ "keys": ["ctrl+q"], "command": "exit" },
+	{ "keys": ["ctrl+shift+n"], "command": "new_window" },
+	{ "keys": ["ctrl+shift+c"], "command": "close_window" },
+
+	// folder commands
+	{ "keys": ["ctrl+x", "ctrl+d"], "command": "prompt_open_folder" },
+
+	// file commands
+	{ "keys": ["ctrl+x", "ctrl+o"], "command": "prompt_open_file" },
+	{ "keys": ["ctrl+x", "ctrl+f"], "command": "show_overlay", "args": {"overlay": "goto", "show_files": true}},
+	{ "keys": ["ctrl+x", "ctrl+l"], "command": "reopen_last_file" },
+	{ "keys": ["ctrl+x", "ctrl+n"], "command": "new_file" },
+	{ "keys": ["ctrl+x", "ctrl+s"], "command": "save" },
+	{ "keys": ["ctrl+shift+s"], "command": "prompt_save_as" },
+	{ "keys": ["ctrl+x", "ctrl+c"], "command": "close_file" },
+	{ "keys": ["ctrl+c"], "command": "close" },
+
+	// undo/redo commands
+	{ "keys": ["ctrl+x", "u"], "command": "undo" },
+	{ "keys": ["ctrl+x", "r"], "command": "redo" },
+
+    // cut/paste commands
+	{ "keys": ["ctrl+w"], "command": "cut" },
+	{ "keys": ["alt+w"], "command": "copy" },
+	{ "keys": ["ctrl+y"], "command": "paste" },	
+
+	// selection
+
+	// selection with normal movement
+	{ "keys": ["ctrl+space+left"], "command": "move", "args": {"by": "characters", "forward": false, "extend": true} },
+	{ "keys": ["ctrl+space+right"], "command": "move", "args": {"by": "characters", "forward": true, "extend": true} },
+	{ "keys": ["ctrl+space+up"], "command": "move", "args": {"by": "lines", "forward": false, "extend": true} },
+	{ "keys": ["ctrl+space+down"], "command": "move", "args": {"by": "lines", "forward": true, "extend": true} },
+
+	// selection of entire words
+	{ "keys": ["ctrl+alt+space+left"], "command": "move", "args": {"by": "words", "forward": false, "extend": true} },
+	{ "keys": ["ctrl+alt+space+right"], "command": "move", "args": {"by": "word_ends", "forward": true, "extend": true} },
+
+	// select all
+	{ "keys": ["ctrl+x", "ctrl+h"], "command": "select_all" },
+
+	// views
+	{ "keys": ["alt+right"], "command": "next_view" },
+	{ "keys": ["alt+left"], "command": "prev_view" }
+]

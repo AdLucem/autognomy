@@ -1,6 +1,6 @@
-name:                config-manager
+name:                startup
 version:             0.1.0.0
-github:              "githubuser/config-manager"
+github:              "githubuser/startup"
 license:             BSD3
 author:              "Author name here"
 maintainer:          "example@example.com"
@@ -17,20 +17,32 @@ extra-source-files:
 # To avoid duplicated efforts in documentation and dealing with the
 # complications of embedding Haddock markup inside cabal files, it is
 # common to point users to the README.md file.
-description:         Please see the README on GitHub at <https://github.com/githubuser/config-manager#readme>
+description:         Please see the README on GitHub at <https://github.com/githubuser/startup#readme>
 
 dependencies:
 - base >= 4.7 && < 5
-- turtle
+
+library:
+  source-dirs: src
 
 executables:
-  config-manager-exe:
+  startup-exe:
     main:                Main.hs
-    source-dirs:         src
+    source-dirs:         app
     ghc-options:
     - -threaded
     - -rtsopts
     - -with-rtsopts=-N
     dependencies:
-    - turtle
+    - startup
 
+tests:
+  startup-test:
+    main:                Spec.hs
+    source-dirs:         test
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - startup

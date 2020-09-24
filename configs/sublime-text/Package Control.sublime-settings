@@ -1,0 +1,23 @@
+{
+	"bootstrapped": true,
+	"in_process_packages":
+	[
+	],
+	"installed_packages":
+	[
+		"AdvancedNewFile",
+		"Anaconda",
+		"Package Control",
+		"SideBarEnhancements",
+		"SublimeLinter",
+		"SublimeLinter-annotations",
+		"SublimeLinter-ghc",
+		"SublimeLinter-hlint",
+		"SublimeLinter-pep8",
+		"SublimeLinter-pycodestyle",
+		"SublimeLinter-rubocop",
+		"SublimeLinter-ruby",
+		"SublimeLinter-shellcheck",
+		"Theme - Spacegray"
+	]
+}

@@ -1,16 +1,16 @@
 cabal-version: 1.12
 
--- This file has been generated from package.yaml by hpack version 0.31.0.
+-- This file has been generated from package.yaml by hpack version 0.33.0.
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: feb2bef78523ee5d0865fac788cf502cc26787a9d07f2b7f58f783767d0aea2c
+-- hash: 5b0963ac2b9e7abe9c1feec7fa92bc626edae45fbd75b02c8e3af6641c2697f0
 
-name:           categoread
+name:           startup
 version:        0.1.0.0
-description:    Please see the README on GitHub at <https://github.com/githubuser/categoread#readme>
-homepage:       https://github.com/githubuser/categoread#readme
-bug-reports:    https://github.com/githubuser/categoread/issues
+description:    Please see the README on GitHub at <https://github.com/githubuser/startup#readme>
+homepage:       https://github.com/githubuser/startup#readme
+bug-reports:    https://github.com/githubuser/startup/issues
 author:         Author name here
 maintainer:     example@example.com
 copyright:      2020 Author name here
@@ -23,17 +23,18 @@ extra-source-files:
 
 source-repository head
   type: git
-  location: https://github.com/githubuser/categoread
+  location: https://github.com/githubuser/startup
 
-executable categoread-exe
+
+executable startup
   main-is: Main.hs
   other-modules:
-      Paths_categoread
+      Paths_startup
   hs-source-dirs:
       src
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
       base >=4.7 && <5
-    , directory
-    , split
+    , turtle
+    , text
   default-language: Haskell2010
