@@ -31,6 +31,7 @@ isProgram "" = False
 isProgram (' ':xs) = isProgram xs
 isProgram s = True
 
+{-
 data Args = Args {
     configDir :: Maybe String,
     installs :: Bool, 
@@ -55,17 +56,19 @@ execInstalls configDir = putStrLn "installling files..."
 execArgs :: Args -> IO ()
 execArgs (Args conf inst subl) = do
     if inst then (execInstalls conf) else (print "")
-
+-}
 
 main = do
     argLine <- getArgs
-    let xs = parseArgs argLine (Args Nothing False False)
-    execArgs xs
-    -- let configDir = (head args)
-    -- handle <- openFile (configDir ++ "installs.txt") ReadMode
-    -- contents <- hGetContents handle
-    -- let programs = filter isProgram $ lines contents
-    -- mapM install programs
+    print argLine
+--    let xs = parseArgs argLine (Args Nothing False False)
+--    execArgs xs
+    let configDir = (head $ argLine)
+    
+    handle <- openFile (configDir ++ "installs.txt") ReadMode
+    contents <- hGetContents handle
+    let programs = filter isProgram $ lines contents
+    mapM install programs
     -- install "sshfs"
     -- install "lolcat"
     -- print configDir
