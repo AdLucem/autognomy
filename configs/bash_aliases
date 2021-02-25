@@ -1,0 +1,4 @@
+#!/bin/bash
+
+alias c="clear"
+alias ll="ls -lah"

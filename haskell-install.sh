@@ -104,7 +104,9 @@ else
         echo "cabal-install executable already exists"
 fi
 
-echo "To access cabal, run the following command:"
+export PATH=$HOME/.local:$PATH
+
+echo "If you're not able to access cabal, run the following command:"
 echo "export PATH=\$HOME/.local:\$PATH"
 
 # -------------- installing stack --------------------------

@@ -11,11 +11,18 @@ nodejs
 # programming tools
 virtualenv
 python3-pip
+npm
+
+# system usage tools
+lm-sensors
+hddtemp
 
 # customization
 chrome-gnome-shell
 gnome-tweak-tool
+gnome-shell-extension-prefs
 lolcat
+redshift
 
 # epub/other formats file reader
 fbreader
