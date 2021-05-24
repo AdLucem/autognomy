@@ -1,0 +1,5 @@
+# install sublime text
+install_sublime.sh
+
+# google chrome
+google_chrome_install.sh

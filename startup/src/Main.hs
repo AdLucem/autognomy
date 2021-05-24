@@ -6,6 +6,18 @@ import System.IO
 import Control.Monad
 import Turtle
 
+{- Some utility functions -}
+
+-- execute a bash command using Turtle, and print the exitcode returned
+execLine line = do
+    exitcode <- shell (T.pack line) empty
+    print exitcode
+
+execLineWithArgs line args = do
+    exitcode <- shell (T.pack line) (return (unsafeTextToLine (T.pack args)))
+    print exitcode
+
+
 checkIfInstalled :: Turtle.FilePath -> IO Bool
 checkIfInstalled program = do
     ifExists <- which program
@@ -14,7 +26,6 @@ checkIfInstalled program = do
         Just x -> return True
 
 -- | Install program if it does not already exist
-install :: String -> IO ()
 install program = do
     ifInstalled <- checkIfInstalled $ decodeString program
     case ifInstalled of
@@ -24,51 +35,97 @@ install program = do
             shell (T.pack $ "sudo apt install " ++ program) "Y"
             putStrLn "Installed"
 
--- | Is given line a program or not
-isProgram :: String -> Bool
-isProgram ('#':xs) = False
-isProgram "" = False
-isProgram (' ':xs) = isProgram xs
-isProgram s = True
 
-{-
-data Args = Args {
-    configDir :: Maybe String,
-    installs :: Bool, 
-    sublimeText :: Bool
-} deriving (Show)
+-- | Execute file in configdir if it exists
+execIfExist configDir (filename, False) =
+    putStrLn $ "File " ++ filename ++ "does not exist!"
+execIfExist configDir (filename, True) = do
+    putStrLn $ "Executing " ++ filename
+    execLine $ "bash " ++ configDir ++ "/" ++ filename
 
 
-parseArgs :: [String] -> Args -> Args
-parseArgs [] args = args 
-parseArgs ("--install":rest) (Args con ins sub) = parseArgs rest (Args con True sub)
-parseArgs ("--sublime":rest) (Args con ins sub) = parseArgs rest (Args con ins True)
-parseArgs ["--config"] (Args con ins sub) = error $ "Arguments:\n" ++
-                            "setup --config <config_dir> [--install] [--sublime]"
-parseArgs ("--config":rest) (Args con ins sub) = parseArgs (tail rest) 
-                                                           (Args (Just (head rest)) ins sub)
-parseArgs xs args = error $ "Arguments:\n" ++
-                            "setup --config <config_dir> [--install] [--sublime]"
+helpString :: String
+helpString = "Format:\n stack run startup <config_filepath>" 
 
-execInstalls :: String -> IO ()
-execInstalls configDir = putStrLn "installling files..."
 
-execArgs :: Args -> IO ()
-execArgs (Args conf inst subl) = do
-    if inst then (execInstalls conf) else (print "")
+{- Execute startup commands, which consist of the following:
+
+- get name of config file
+    - if config file does not exist, raise error
+- Checking-else-Installing programs listed in `installs.txt`
+- Installing gnome shell extensions using `extensions.sh`
+- Executing any other bash files specified in `run_custom.txt`, in the 
+  order that the files are listed. The bash files must also be in 
+  config directory
 -}
 
-main = do
-    argLine <- getArgs
-    print argLine
---    let xs = parseArgs argLine (Args Nothing False False)
---    execArgs xs
-    let configDir = (head $ argLine)
-    
-    handle <- openFile (configDir ++ "installs.txt") ReadMode
-    contents <- hGetContents handle
-    let programs = filter isProgram $ lines contents
+execInstallsIf False filename =
+    putStrLn $ "File " ++ filename ++ " does not exist!"
+execInstallsIf True filename = do
+    putStrLn $ "Installing programs from file " ++ filename
+    -- read in installs.txt file
+    content <- readFile filename
+    -- remove comments and whitespace/empty lines
+    let programs = filter (\x -> (x /= "") && 
+                                 ((head x) /= '#') && 
+                                 (any (/= ' ') x)) 
+                          (lines content)
     mapM install programs
-    -- install "sshfs"
-    -- install "lolcat"
-    -- print configDir
+    return ()
+
+
+execExtensionsIf False filename = 
+    putStrLn $ "File " ++ filename ++ " does not exist!"
+execExtensionsIf True filename = do
+    putStrLn $ "Running extensions installer " ++ filename
+    execLine $ "bash " ++ filename
+
+
+execCustomIf configDir False filename =
+    putStrLn $ "File " ++ filename ++ " does not exist!"
+execCustomIf configDir True filename = do 
+    putStrLn $ "Running custom bash files from: " ++ filename
+    -- read in contents of file
+    content <- readFile filename
+    -- remove whitespace, empty lines and comments
+    -- remove comments and whitespace/empty lines
+    let bashfiles = filter (\x -> (x /= "") && 
+                                  ((head x) /= '#') && 
+                                  (any (/= ' ') x)) 
+                            (lines content)
+    -- check if all bash files specified exist
+    bashExist <- mapM 
+                    (\x -> testfile $ fromString $ configDir ++ "/" ++ x)
+                    bashfiles
+    -- execute files if they exist
+    mapM (execIfExist configDir) $ zip bashfiles bashExist 
+    return ()
+
+
+execStartup configDir = do
+    putStrLn "to be implemented..."
+    -- check if installs file exists
+    installsExists <- testfile $ fromString $ configDir ++ "/installs.txt"
+    putStrLn $ "Installs file exists: " ++ (show installsExists)
+    execInstallsIf installsExists (configDir ++ "/installs.txt")
+    -- install chrome-gnome-shell for extensions
+    install "chrome-gnome-shell"
+    -- check if extensions.sh exists
+    extExists <- testfile $ fromString $ configDir ++ "/extensions.sh"
+    putStrLn $ "Extensions installer exists: " ++ (show extExists)
+    execExtensionsIf extExists (configDir ++ "/extensions.sh")
+    -- check if `run_custom.txt` exists
+    customExists <- testfile $ fromString $ configDir ++ "/run_custom.txt"
+    putStrLn $ "run_custom.txt exists: " ++ (show customExists)
+    execCustomIf configDir customExists (configDir ++ "/run_custom.txt")
+
+
+{------------ MAIN -------------}
+
+
+main = do
+    args <- getArgs
+    -- is format correct
+    case (length args) of
+        1 -> execStartup $ head args
+        _ -> error helpString
