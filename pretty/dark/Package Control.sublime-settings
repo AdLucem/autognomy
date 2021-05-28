@@ -1,0 +1,33 @@
+{
+	"bootstrapped": true,
+	"in_process_packages":
+	[
+	],
+	"installed_packages":
+	[
+		"AdvancedNewFile",
+		"Anaconda",
+		"Babel",
+		"Bracketeer",
+		"BracketHighlighter",
+		"Emacs Pro Essentials",
+		"Emmet",
+		"HTML-CSS-JS Prettify",
+		"MarkdownPreview",
+		"Package Control",
+		"Pretty JSON",
+		"SideBarEnhancements",
+		"SublimeLinter",
+		"SublimeLinter-annotations",
+		"SublimeLinter-eslint",
+		"SublimeLinter-ghc",
+		"SublimeLinter-hlint",
+		"SublimeLinter-pep8",
+		"SublimeLinter-pycodestyle",
+		"SublimeLinter-rubocop",
+		"SublimeLinter-ruby",
+		"SublimeLinter-shellcheck",
+		"Theme - Spaceblack",
+		"Theme - Spacegray"
+	],
+}
