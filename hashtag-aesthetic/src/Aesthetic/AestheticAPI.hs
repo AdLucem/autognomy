@@ -19,7 +19,7 @@ import DataLoader
 -- | reads in an Aesthetic and applies it to the system 
 loadAesthetic :: FilePath -> IO ()
 loadAesthetic aesFile = do
-    d <- getData aesFile
+    d <- getData (aesFile ++ "/" ++ aesfile ++ ".json")
     let gtk = (parseAesthetic d) :: Either String GTKAesthetic
     case gtk of
         Left err -> putStrLn err

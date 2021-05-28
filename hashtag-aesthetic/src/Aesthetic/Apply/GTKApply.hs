@@ -14,7 +14,7 @@ import GTKTypes
 --  Just x  -> x
 
 changeWallpaper :: GTKAesthetic -> Shell Line
-changeWallpaper (GTKAesthetic wpaper _ _ _) = 
+changeWallpaper (GTKAesthetic wpaper _ _ _) =
     inshell (T.pack $ "gsettings set org.gnome.desktop.background picture-uri " ++ wpaper) empty
 
 
