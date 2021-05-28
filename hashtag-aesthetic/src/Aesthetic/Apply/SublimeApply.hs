@@ -5,11 +5,18 @@ module SublimeApply where
 
 import Turtle
 import qualified Data.Text as T
+import qualified System.Directory as S
 
 import SublimeTypes
 
-importConfigs :: SublimeAesthetic -> io () 
-importConfigs (SublimeAesthetic upref kbinds ppref) = do
-	mv upref "~/.config/sublime-text/Packages/User/"
-	mv kbinds "~/.config/sublime-text/Packages/User/"
-	mv ppref "~/.config/sublime-text/Packages/User/"
+importConfigs :: String -> SublimeAesthetic -> IO () 
+importConfigs aesFile (SublimeAesthetic upref kbinds ppref) = do
+	-- get current user's home directory
+	homedir <- S.getHomeDirectory
+
+	cp (Turtle.fromText $ T.pack $ aesFile ++ "/" ++ upref) 
+	   (Turtle.fromText $ T.pack $ homedir ++ "/.config/sublime-text/Packages/User/" ++ upref)
+	cp (Turtle.fromText $ T.pack $ aesFile ++ "/" ++ kbinds) 
+	   (Turtle.fromText $ T.pack $ homedir ++ "/.config/sublime-text/Packages/User/" ++ kbinds)
+	cp (Turtle.fromText $ T.pack $ aesFile ++ "/" ++ ppref) 
+	   (Turtle.fromText $ T.pack $ homedir ++ "/.config/sublime-text/Packages/User/" ++ ppref)

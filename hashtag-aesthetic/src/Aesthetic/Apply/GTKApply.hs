@@ -5,6 +5,7 @@ module GTKApply where
 
 import Turtle
 import qualified Data.Text as T
+import qualified System.Directory as S
 
 import GTKTypes
 
@@ -13,8 +14,17 @@ import GTKTypes
 --  Nothing -> unsafeTextToLine $ T.pack "Error"
 --  Just x  -> x
 
-changeWallpaper :: GTKAesthetic -> Shell Line
-changeWallpaper (GTKAesthetic wpaper _ _ _) =
+wallpaperCheck :: GTKAesthetic -> IO String
+wallpaperCheck (GTKAesthetic wpaper _ _ _) = do 
+    homedir <- S.getHomeDirectory
+    exists <- S.doesFileExist $ homedir ++ "/autognomy/pretty/pictures/" ++ wpaper
+    case exists of 
+        True -> return $ homedir ++ "/autognomy/pretty/pictures/" ++ wpaper
+        False -> return $ homedir ++ "/autognomy/pretty/pictures/" ++ wpaper ++ "   false"
+
+
+changeWallpaper :: String -> Shell Line
+changeWallpaper wpaper =
     inshell (T.pack $ "gsettings set org.gnome.desktop.background picture-uri " ++ wpaper) empty
 
 
