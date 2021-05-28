@@ -6,34 +6,21 @@ import Data.Aeson
 
 import Aesthetic
 
-data CustomPair =
-    CustomPair
-    {
-        key :: String,
-        value :: String
-    } deriving (Show, Read)
-
-
-instance FromJSON CustomPair where
-    parseJSON = withObject "CustomPair" $ \ v ->
-            CustomPair <$> v .: "key"
-                       <*> v .: "value"
-
 
 data SublimeAesthetic =
     SublimeAesthetic
     {
-        sublTheme :: String,
-        colorScheme :: String,
-        customPairs :: [CustomPair]
+        userPref :: String,
+        keybinds :: String,
+        packagePref :: String
     }  deriving (Show, Read)
 
 
 instance FromJSON SublimeAesthetic where
     parseJSON = withObject "SublimeAesthetic" $ \ v ->
-            SublimeAesthetic <$> v .: "sublime-theme"
-                             <*> v .: "color-scheme"
-                             <*> v .: "custom-pairs"
+            SublimeAesthetic <$> v .: "user-pref"
+                             <*> v .: "keybinds"
+                             <*> v .: "package-pref"
 
 
 instance Aesthetic SublimeAesthetic where
