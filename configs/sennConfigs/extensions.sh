@@ -8,17 +8,23 @@ git clone git://github.com/eonpatapon/gnome-shell-extension-caffeine.git
 cd gnome-shell-extension-caffeine
 ./update-locale.sh
 glib-compile-schemas --strict --targetdir=caffeine@patapon.info/schemas/ caffeine@patapon.info/schemas
-cp -r caffeine@patapon.info ~/.local/share/gnome-shell/extensions
+cp -r caffeine@patapon.info ~/.local/share/gnome-shell/extensions/
+cd ~/.local/share/gnome-shell/extensions/caffeine@patapon.info
+make
+make install
 
 # coverflow alt-tab
 cd ~
 git clone https://github.com/dmo60/CoverflowAltTab.git
 cd CoverflowAltTab
+cp CoverflowAltTab@dmo60.de ~/.local/share/gnome-shell/extensions/
+cd ~/.local/share/gnome-shell/extensions/CoverflowAltTab@dmo60.de
 make all
 
 # dash to dock
 cd ~
 git clone https://github.com/micheleg/dash-to-dock.git
+cd dash-to-dock
 make
 make install
 
