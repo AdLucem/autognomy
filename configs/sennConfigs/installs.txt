@@ -3,6 +3,7 @@ tree
 curl
 sshfs
 tmux
+gettext
 
 # programming languages
 python3
