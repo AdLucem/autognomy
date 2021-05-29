@@ -16,10 +16,19 @@ import Aesthetic
 import GTKApply
 import SublimeApply
 import DataLoader
-
-
+{-
+applyGTK (Left err) = T.std
+        Left err -> putStrLn err
+        Right dat -> do
+            wpaper <- wallpaperCheck dat
+            changeWallpaper wpaper
+            changeGTKTheme dat
+            changeShellTheme dat
+            changeIconTheme dat
+            print wpaper
+-}
 -- | reads in an Aesthetic and applies it to the system 
-loadAesthetic :: FilePath -> IO ()
+-- loadAesthetic :: FilePath -> IO ()
 loadAesthetic aesFile = do
     -- get current user's home directory
     homedir <- getHomeDirectory
@@ -35,11 +44,11 @@ loadAesthetic aesFile = do
         Left err -> putStrLn err
         Right dat -> do
             wpaper <- wallpaperCheck dat
-            let resWall = changeWallpaper wpaper
-            let resTh = changeGTKTheme dat
-            let resSh = changeShellTheme dat
-            let resIcn = changeIconTheme dat
-            print wpaper
+            changeWallpaper wpaper
+            changeGTKTheme dat
+            changeShellTheme dat
+            changeIconTheme dat
+            print $ "Changed wallpaper to " ++ wpaper
 
     -- parse and execute sublime text aesthetic
     let sublime = (parseAesthetic s) :: Either String SublimeAesthetic

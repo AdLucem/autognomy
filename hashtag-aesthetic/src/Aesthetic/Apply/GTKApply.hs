@@ -23,21 +23,21 @@ wallpaperCheck (GTKAesthetic wpaper _ _ _) = do
         False -> return $ homedir ++ "/autognomy/pretty/pictures/" ++ wpaper ++ "   false"
 
 
-changeWallpaper :: String -> Shell Line
+changeWallpaper :: String -> IO ExitCode
 changeWallpaper wpaper =
-    inshell (T.pack $ "gsettings set org.gnome.desktop.background picture-uri " ++ wpaper) empty
+    shell (T.pack $ "gsettings set org.gnome.desktop.background picture-uri " ++ wpaper) empty
 
 
-changeGTKTheme :: GTKAesthetic -> Shell Line
+changeGTKTheme :: GTKAesthetic -> IO ExitCode
 changeGTKTheme (GTKAesthetic _ theme _ _) =
-    inshell (T.pack $ "gsettings set org.gnome.desktop.interface gtk-theme " ++ theme) empty
+    shell (T.pack $ "gsettings set org.gnome.desktop.interface gtk-theme " ++ theme) empty
 
 
-changeShellTheme :: GTKAesthetic -> Shell Line
+changeShellTheme :: GTKAesthetic -> IO ExitCode
 changeShellTheme (GTKAesthetic _ _ shTheme _) =
-    inshell (T.pack $ "gsettings set org.gnome.shell.extensions.user-theme name " ++ shTheme) empty
+    shell (T.pack $ "gsettings set org.gnome.shell.extensions.user-theme name " ++ shTheme) empty
 
 
-changeIconTheme :: GTKAesthetic -> Shell Line  
+changeIconTheme :: GTKAesthetic -> IO ExitCode  
 changeIconTheme (GTKAesthetic _ _ _ icnTheme) =
-    inshell (T.pack $ "gsettings set org.gnome.desktop.interface icon-theme " ++ icnTheme) empty
+    shell (T.pack $ "gsettings set org.gnome.desktop.interface icon-theme " ++ icnTheme) empty
