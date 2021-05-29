@@ -13,6 +13,7 @@
 		"Emacs Pro Essentials",
 		"Emmet",
 		"HTML-CSS-JS Prettify",
+		"Kerbal Space Program Configuration Syntax",
 		"MarkdownPreview",
 		"Package Control",
 		"Pretty JSON",
@@ -28,6 +29,6 @@
 		"SublimeLinter-ruby",
 		"SublimeLinter-shellcheck",
 		"Theme - Spaceblack",
-		"Theme - Spacegray"
+		"Theme - Spacegray",
 	],
 }

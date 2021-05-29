@@ -6,6 +6,7 @@ module AestheticAPI
 
 -- library imports
 import qualified Turtle as T
+import qualified Data.Text as Text
 import qualified Data.ByteString.Lazy as B
 import Data.Aeson
 import System.Directory as S
@@ -16,19 +17,8 @@ import Aesthetic
 import GTKApply
 import SublimeApply
 import DataLoader
-{-
-applyGTK (Left err) = T.std
-        Left err -> putStrLn err
-        Right dat -> do
-            wpaper <- wallpaperCheck dat
-            changeWallpaper wpaper
-            changeGTKTheme dat
-            changeShellTheme dat
-            changeIconTheme dat
-            print wpaper
--}
+
 -- | reads in an Aesthetic and applies it to the system 
--- loadAesthetic :: FilePath -> IO ()
 loadAesthetic aesFile = do
     -- get current user's home directory
     homedir <- getHomeDirectory
@@ -45,6 +35,11 @@ loadAesthetic aesFile = do
         Right dat -> do
             wpaper <- wallpaperCheck dat
             changeWallpaper wpaper
+            -- if themes dir does not exist
+            themesExists <- S.doesDirectoryExist $ homedir ++ "/.themes"
+            case themesExists of 
+                True -> print "Themes file exists"
+                False -> T.mkdir $ T.fromText $ Text.pack $ homedir ++ "/.themes"
             changeGTKTheme dat
             changeShellTheme dat
             changeIconTheme dat
