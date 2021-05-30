@@ -8,6 +8,7 @@ gettext
 # programming languages
 python3
 nodejs
+openjdk-14-jre-headless
 
 # programming tools
 virtualenv
@@ -27,4 +28,6 @@ redshift
 
 # epub/other formats file reader
 fbreader
-          
+
+# gaming
+steam-installer          
