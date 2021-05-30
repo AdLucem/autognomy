@@ -1,0 +1,13 @@
+{
+	"color_scheme": "Packages/Theme - Spaceblack/Color Schemes/Spaceblack.tmTheme",
+	"font_size": 28,
+	"ignored_packages":
+	[
+	],
+	"theme": "Darkmatter.sublime-theme",
+	"translate_tabs_to_spaces": true,
+	"word_wrap": "true",
+	"material_theme_accent_purple"            : true, // Set purple accent color
+	"material_theme_contrast_mode"            : true, // Enable sidebar and panels contrast mode
+	"material_theme_small_tab"                : true, // Set small tabs
+}

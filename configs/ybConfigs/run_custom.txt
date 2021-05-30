@@ -1,0 +1,8 @@
+# install sublime text
+install_sublime.sh
+
+# google chrome
+google_chrome_install.sh
+
+# install flat-remix theme
+flat_remix_install.sh
