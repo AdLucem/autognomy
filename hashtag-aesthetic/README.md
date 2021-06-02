@@ -1,22 +1,27 @@
 # \#aesthetic
 
-\#aesthetic is a command-line application that automatically sets the "aesthetic" or look for your Gnome desktop and utilities, as you want it.
+This is a bunch of gnome shell commands, wrapped in haskell, that changes your (gnome) desktop to your preferred:
 
-Each "aesthetic"- your desktop look- should be defined as a JSON file, that currently contains the following fields:
+* theme (stored in your google drive folder)
+* shell theme (stored in your google drive folder)
+* icon theme (stored in your google drive folder)
+* wallpaper (stored in `autognomy/pretty/pictures`)
+* sublime text config files (stored in `autognomy/pretty/<your #aesthetic name>`)
 
-* wallpaper 
-* gtk-theme
-* shell-theme
-* icon-theme 
+Example aesthetics are in [../pretty/](../pretty)
 
-The application only works if you have the themes, icon themes et cetera already on your PC- the assumption is that you have a bunch of predefined "looks", defined in the `aesthetic` files, and the application allows you to change between looks at a single click.
+## Usage
 
-Example aesthetics are in [./pretty/](./pretty)
-
-### Usage
+In the home directory, run:
 
 ```bash
-$ ./build.sh
-$ ./aesthetic.sh <path-to-json-file>
+$ stack build
+$ stack run
 ```
 
+## Pipe Dreams
+
+Functionality I hope to add in the future:
+
+* Automatically download + unzip themes, using `wget` or `curl`, from a specified link. So that I don't have to cart around the `theme.tar.gz` files in my google drive.
+* Specify a list of color hex codes, have the program switch between a range of wallpapers (stored in `~/Pictures/Wallpapers`) that have 'dominant' colors in the specified color list.
