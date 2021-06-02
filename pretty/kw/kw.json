@@ -1,11 +1,11 @@
 {	
-	"wallpaper": "angry_cyborg.jpg",
-	"gtk-theme": "Cloudy-SoftGrey-Dark", 
-	"gtk-theme-id" : "1eOtVIlu5XIb8r9atbF_DvnpK0l8CoiKU",
+	"wallpaper": "robot-on-bike.jpg",
+	"gtk-theme": "Flat-Remix-GTK-Blue-Darkest-NoBorder", 
+	"gtk-theme-id" : "",
 	"shell-theme": "Flat-Remix-Red-Darkest", 
 	"shell-theme-id" : "1s92fp9yCLwXpx5Srl1X9GSsboK9MfbCd", 
-	"icon-theme": "Ubuntu-mono-dark", 
-	"icon-theme-id" : ""
+	"icon-theme": "Candy-icons", 
+	"icon-theme-id" : "1y3LUZnhw8ggjbaW2xFp9RAA14G4QVejP"
 }
 
 

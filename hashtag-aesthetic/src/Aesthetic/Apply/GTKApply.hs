@@ -62,5 +62,14 @@ changeShellTheme (GTKAesthetic _ _ _ shTheme shThemeId _ _) = do
 
 
 changeIconTheme :: GTKAesthetic -> IO ExitCode  
-changeIconTheme (GTKAesthetic _ _ _ _ _ icnTheme icnThemeId) =
+changeIconTheme (GTKAesthetic _ _ _ _ _ icnTheme icnThemeId) = do
+    homedir <- S.getHomeDirectory
+
+    -- cd ~/.icons
+    cd $ fromText $ T.pack $ homedir ++ "/.icons"
+    -- download icons zip file from my google drive
+    shell (T.pack $ gDownload icnThemeId icnTheme) empty
+    -- unzip file
+    shell (T.pack $ "tar xvzf " ++ icnTheme ++ ".tar.gz") empty
+    -- set the icon theme
     shell (T.pack $ "gsettings set org.gnome.desktop.interface icon-theme " ++ icnTheme) empty

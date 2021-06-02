@@ -40,6 +40,11 @@ loadAesthetic aesFile = do
             case themesExists of 
                 True -> print "Themes file exists"
                 False -> T.mkdir $ T.fromText $ Text.pack $ homedir ++ "/.themes"
+            -- if icons dir does not exist
+            iconsExists <- S.doesDirectoryExist $ homedir ++ "/.icons"
+            case iconsExists of 
+                True -> print "Icons file exists"
+                False -> T.mkdir $ T.fromText $ Text.pack $ homedir ++ "/.icons"
             changeGTKTheme dat
             changeShellTheme dat
             changeIconTheme dat

@@ -1,0 +1,5 @@
+{
+	"user-pref" : "Preferences.sublime-settings",
+	"keybinds" : "Default (Linux).sublime-keymap",
+	"package-pref" : "Package Control.sublime-settings"
+}
