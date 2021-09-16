@@ -1,6 +1,7 @@
 import AO3
 import argparse
 import json
+import time
 
 
 """My own class for storing a Fic object"""
@@ -13,15 +14,15 @@ class Fic:
 
         elif not from_dict:
             self.work_id = work_id 
-            self.work = AO3.Work(self.work_id)
+            self.work = AO3.Work(self.work_id, load=False, load_chapters=False)
 
-            self.title = self.work.title
-            self.fandoms = self.work.fandoms
+            self.title = self.work.title()
+            # self.fandoms = self.work.fandoms
 
-            self.tags = self.work.tags
-            self.characters = self.work.characters
-            self.relationships = self.work.relationships
-            self.summary = self.work.summary
+            # self.tags = self.work.tags
+            # self.characters = self.work.characters
+            # self.relationships = self.work.relationships
+            # self.summary = self.work.summary
 
     def __repr__(self):
 
@@ -82,7 +83,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Download all fics in your Marked For Later list, sort by fandom and store in a easily readable markdown file')
     parser.add_argument('--username', type=str, help="Username of account.")
     parser.add_argument('--password', type=str, help="Password of account.")
-    
+
     args = parser.parse_args()
 
     with open("m4l.txt") as f:
@@ -90,6 +91,24 @@ if __name__ == "__main__":
 
     storage = []
 
+    worksToLoad = []
+    for work_id in works4l:
+        try: 
+            worksToLoad.append(AO3.Work(work_id, load=False))
+        except AttributeError:
+            continue
+
+    works = []
+    threads = []
+    start = time.time()
+    for work in worksToLoad:
+        works.append(work)
+        threads.append(work.reload(threaded=True))
+    for thread in threads:
+        thread.join()
+    print(f"Loaded {len(works)} works in {round(time.time()-start, 1)} seconds.")
+
+"""
     for work_id in works4l:
         try:
             work_obj = Fic(work_id=work_id)
@@ -100,7 +119,7 @@ if __name__ == "__main__":
     with open("works_for_later.json", "w+") as f:
         json.dump(storage, f)
 
-"""
+
     session = login(args.username, args.password)
     works4l = get_m4l(session)
 
