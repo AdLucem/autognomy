@@ -12,7 +12,8 @@ data SublimeAesthetic =
     {
         userPref :: String,
         keybinds :: String,
-        packagePref :: String
+        packagePref :: String,
+        otherPref :: [String]
     }  deriving (Show, Read)
 
 
@@ -21,7 +22,7 @@ instance FromJSON SublimeAesthetic where
             SublimeAesthetic <$> v .: "user-pref"
                              <*> v .: "keybinds"
                              <*> v .: "package-pref"
-
+                             <*> v .: "other-pref"
 
 instance Aesthetic SublimeAesthetic where
     isCorrect aes = True

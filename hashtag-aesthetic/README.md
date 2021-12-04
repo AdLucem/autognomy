@@ -12,7 +12,7 @@ Example aesthetics are in [../pretty/](../pretty)
 
 ## How To Store Shell/Icon Themes
 
-1. Upload theme folder to google drive
+1. Upload `theme_folder.tar.gz` to google drive
 2. Navigate to the file in your browser at drive.google.com
 3. Right-click on the file, click "get a shareable link" -> "anyone with this link can view"
 4. Get the file identifier from the above link, store in aesthetic file
