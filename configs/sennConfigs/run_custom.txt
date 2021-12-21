@@ -3,3 +3,6 @@ install_sublime.sh
 
 # google chrome
 google_chrome_install.sh
+
+# telegram
+telegram_install.sh
