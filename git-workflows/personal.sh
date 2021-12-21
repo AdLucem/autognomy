@@ -5,4 +5,4 @@ git config --global credential.helper store
 
 git add .
 git commit -m "random commit to store credentials"
-git push -u origin main
+git push -u origin master
