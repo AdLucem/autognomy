@@ -6,3 +6,6 @@ google_chrome_install.sh
 
 # telegram
 telegram_install.sh
+
+# emacs prelude
+install_prelude.sh
