@@ -27,6 +27,4 @@ redshift
 
 # epub/other formats file reader
 fbreader
-
-# backup/sync tool
-rclone          
+          
