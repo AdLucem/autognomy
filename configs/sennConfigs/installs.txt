@@ -5,6 +5,9 @@ sshfs
 tmux
 gettext
 
+# text editors
+emacs
+
 # programming languages
 python3
 nodejs
