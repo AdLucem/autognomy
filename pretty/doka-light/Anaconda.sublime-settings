@@ -1,0 +1,38 @@
+{
+    "disable_anaconda_completion": true,
+    "auto_complete_commit_on_tab": false,
+    "auto_complete_triggers": 
+    [
+        {
+            "characters": "."
+        }
+    ],
+    "pep8_ignore":
+        [
+            // line too long
+            "E501",
+            // extra whitespace on blank line
+            "W293",
+            // trailing whitespace
+            "W291"
+        ],
+    // automatically fix the errors listed here
+    "autoformat_select":
+    [
+        // fix indentation to be a multiple of four
+        "E121",
+        // fix visual indentation
+        "E127",
+        // fix visual indentation
+        "E128",
+        // remove extraneous whitespace
+        "E201",
+        "E202",
+        "E203",
+        "E211",
+        // Remove trailing whitespace.
+        "W291",
+        // Remove trailing whitespace on blank line.
+        "W293"
+    ]
+}

@@ -1,0 +1,6 @@
+{
+	"user-pref" : "Preferences.sublime-settings",
+	"keybinds" : "Default (Linux).sublime-keymap",
+	"package-pref" : "Package Control.sublime-settings",
+	"other-pref" : ["Anaconda.sublime-settings"]
+}
