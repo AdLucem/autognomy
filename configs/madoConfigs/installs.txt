@@ -5,9 +5,6 @@ sshfs
 tmux
 gettext
 
-# text editors
-emacs
-
 # programming languages
 python3
 nodejs
@@ -30,6 +27,4 @@ redshift
 
 # epub/other formats file reader
 fbreader
-
-# backup/sync tool
-rclone          
+          
