@@ -1,0 +1,11 @@
+{
+	"color_scheme": "Packages/Theme - Darkmatter/Darkmatter.tmTheme",
+	"font_size": 28,
+	"ignored_packages":
+	[
+	],
+	"theme": "Cyanide - Salmon.sublime-theme",
+	"translate_tabs_to_spaces": true,
+	"word_wrap": "true",
+	"icon_file_type_enable": true,
+}

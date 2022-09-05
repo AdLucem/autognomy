@@ -1,7 +1,8 @@
 {-# LANGUAGE OverloadedStrings #-}
 
 module AestheticAPI
-    ( loadAesthetic
+    ( loadAesthetic,
+      makeover
     ) where
 
 -- library imports
@@ -18,21 +19,20 @@ import GTKApply
 import SublimeApply
 import DataLoader
 
--- | reads in an Aesthetic and applies it to the system 
-loadAesthetic aesFile = do
-    -- get current user's home directory
-    homedir <- getHomeDirectory
+fromEither :: Aesthetic a => Either String a -> a
+fromEither eitherAesthetic = case eitherAesthetic of 
+    Left errorMessage -> error errorMessage
+    Right aesthetic -> aesthetic
 
-    -- get GTK aesthetic json
-    d <- getData (homedir ++ "/autognomy/pretty/" ++ aesFile ++ "/" ++ aesFile ++ ".json")
-    -- get Sublime aesthetic json
-    s <- getData (homedir ++ "/autognomy/pretty/" ++ aesFile ++ "/sublime.json")
+-- | applies a set of aesthetics to a system
+makeover :: (GTKAesthetic, SublimeAesthetic) -> IO ()
+makeover (gtkAesthetic, sublimeAesthetic) = 
+    let 
 
-    -- parse and execute GTK aesthetic
-    let gtk = (parseAesthetic d) :: Either String GTKAesthetic
-    case gtk of
-        Left err -> putStrLn err
-        Right dat -> do
+        gtkMakeover dat = do 
+            -- get current user's home directory
+            homedir <- getHomeDirectory
+            -- check if wallpaper exists, then change wallpaper
             wpaper <- wallpaperCheck dat
             changeWallpaper wpaper
             -- if themes dir does not exist
@@ -45,17 +45,62 @@ loadAesthetic aesFile = do
             case iconsExists of 
                 True -> print "Icons file exists"
                 False -> T.mkdir $ T.fromText $ Text.pack $ homedir ++ "/.icons"
+            
             changeGTKTheme dat
             changeShellTheme dat
             changeIconTheme dat
             print $ "Changed wallpaper to " ++ wpaper
 
-    -- parse and execute sublime text aesthetic
-    let sublime = (parseAesthetic s) :: Either String SublimeAesthetic
-    case sublime of
-        Left s_err -> putStrLn s_err
-        Right s_dat -> do
-            importConfigs (homedir ++ "/autognomy/pretty/" ++ aesFile) s_dat
+        sublimeMakeover sdat = do 
+            -- get current user's home directory
+            homedir <- getHomeDirectory
+            importConfigs (homedir ++ "/autognomy/pretty/" ++ aesFile) sdat
             print "Imported sublime text configs!"
 
+    in  
+        do 
+            gtkMakeover gtkAesthetic
+            sublimeMakeover sublimeAesthetic
+
+-- | reads in an Aesthetic and parses it
+-- | throws error if aesthetic is not able to be parsed
+loadAesthetic :: FilePath -> IO (GTKAesthetic, SublimeAesthetic)
+loadAesthetic aesFile = do
+    -- get current user's home directory
+    homedir <- getHomeDirectory
+
+    -- get GTK aesthetic json
+    d <- getData (homedir ++ "/autognomy/pretty/" ++ aesFile ++ "/" ++ aesFile ++ ".json")
+    -- get Sublime aesthetic json
+    s <- getData (homedir ++ "/autognomy/pretty/" ++ aesFile ++ "/sublime.json")
+
+    -- parse both the JSONs
+    let gtk = (parseAesthetic d) :: Either String GTKAesthetic
+    let sublime = (parseAesthetic s) :: Either String SublimeAesthetic
+
+    return (fromEither gtk, fromEither sublime)
+            -- wpaper <- wallpaperCheck dat
+            -- changeWallpaper wpaper
+            -- if themes dir does not exist
+            -- themesExists <- S.doesDirectoryExist $ homedir ++ "/.themes"
+            -- case themesExists of 
+                -- True -> print "Themes file exists"
+                -- False -> T.mkdir $ T.fromText $ Text.pack $ homedir ++ "/.themes"
+            -- if icons dir does not exist
+            -- iconsExists <- S.doesDirectoryExist $ homedir ++ "/.icons"
+            -- case iconsExists of 
+                -- True -> print "Icons file exists"
+                -- False -> T.mkdir $ T.fromText $ Text.pack $ homedir ++ "/.icons"
+            -- changeGTKTheme dat
+            -- changeShellTheme dat
+            -- changeIconTheme dat
+            -- print $ "Changed wallpaper to " ++ wpaper
+
+    -- parse and execute sublime text aesthetic
+    -- let sublime = (parseAesthetic s) :: Either String SublimeAesthetic
+    -- case sublime of
+        -- Left s_err -> putStrLn s_err
+        -- Right s_dat -> do
+            -- importConfigs (homedir ++ "/autognomy/pretty/" ++ aesFile) s_dat
+            -- print "Imported sublime text configs!"
 
