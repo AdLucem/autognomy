@@ -17,8 +17,8 @@ if_exists curl
 
 # -------- install ghc -------------
 
-GHC_VERSION=9.2.1
-DEB_VERSION=10
+GHC_VERSION=8.10.6
+DEB_VERSION=9
 GHC_DIR="ghc-$GHC_VERSION"
 GHC_BINARY_FILE="ghc-$GHC_VERSION-x86_64-deb$DEB_VERSION-linux.tar.xz"
 
@@ -49,8 +49,8 @@ echo `ghc --version`
 
 # -------------- install cabal -----------------
 
-CABAL_VERSION=3.6.2.0
-CABAL_DIR="Cabal-3.6.2.0"
+CABAL_VERSION=3.2.1.0
+CABAL_DIR="Cabal-3.2.1.0"
 
 if [ ! -d "$HOME/.local/$CABAL_DIR" ]
 then

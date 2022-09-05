@@ -21,9 +21,8 @@ cpConfig aesFile filename = do
      
 {- This is the "import configs" function that's actually just 4 copy statements in a row. Hopefully it changes to an actual import-and-merge-the-config-jsons function sometime -}
 importConfigs :: String -> SublimeAesthetic -> IO () 
-importConfigs aesFile (SublimeAesthetic upref kbinds ppref oprefList) = do
+importConfigs aesFile (SublimeAesthetic upref kbinds ppref) = do
         
-        mapM (cpConfig aesFile) oprefList
         cpConfig aesFile upref
         cpConfig aesFile kbinds
         cpConfig aesFile ppref
