@@ -44,11 +44,11 @@ if __name__ == "__main__":
             fandoms[fandom] = [fic]
 
     for fandom in fandoms:
-        print("+++++++++++++++++++++++++++++++++++")
+        print("+++++++++++++++++++++++++++++++++++\n")
         print(fandom)
         for fic in fandoms[fandom]:
             print(fic)
-        print("+++++++++++++++++++++++++++++++++++")
+        print("+++++++++++++++++++++++++++++++++++\n")
 
     """
     session = login(args.username, args.password)
