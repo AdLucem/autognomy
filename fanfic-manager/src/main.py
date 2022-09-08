@@ -45,7 +45,7 @@ if __name__ == "__main__":
 
     for fandom in fandoms:
         print("+++++++++++++++++++++++++++++++++++\n")
-        print(fandom + "\n")
+        print("## " + fandom + "\n")
         for fic in fandoms[fandom]:
             print(fic)
         print("+++++++++++++++++++++++++++++++++++\n")
