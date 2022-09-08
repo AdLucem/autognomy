@@ -37,7 +37,6 @@ if __name__ == "__main__":
     fandoms = {}
     for fic in fics:
         fandom = fic.fandoms[0]
-        print(fandom)
 
         if fandom in fandoms:
             fandoms[fandom].append(fic)
