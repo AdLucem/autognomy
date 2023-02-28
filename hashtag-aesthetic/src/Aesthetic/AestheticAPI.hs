@@ -25,8 +25,8 @@ fromEither eitherAesthetic = case eitherAesthetic of
     Right aesthetic -> aesthetic
 
 -- | applies a set of aesthetics to a system
-makeover :: (GTKAesthetic, SublimeAesthetic) -> IO ()
-makeover (gtkAesthetic, sublimeAesthetic) = 
+makeover :: FilePath -> (GTKAesthetic, SublimeAesthetic) -> IO ()
+makeover aesFile (gtkAesthetic, sublimeAesthetic) = 
     let 
 
         gtkMakeover dat = do 
@@ -64,7 +64,7 @@ makeover (gtkAesthetic, sublimeAesthetic) =
 
 -- | reads in an Aesthetic and parses it
 -- | throws error if aesthetic is not able to be parsed
-loadAesthetic :: FilePath -> IO (GTKAesthetic, SublimeAesthetic)
+loadAesthetic :: FilePath -> IO ()
 loadAesthetic aesFile = do
     -- get current user's home directory
     homedir <- getHomeDirectory
@@ -78,29 +78,33 @@ loadAesthetic aesFile = do
     let gtk = (parseAesthetic d) :: Either String GTKAesthetic
     let sublime = (parseAesthetic s) :: Either String SublimeAesthetic
 
-    return (fromEither gtk, fromEither sublime)
-            -- wpaper <- wallpaperCheck dat
-            -- changeWallpaper wpaper
-            -- if themes dir does not exist
-            -- themesExists <- S.doesDirectoryExist $ homedir ++ "/.themes"
-            -- case themesExists of 
-                -- True -> print "Themes file exists"
-                -- False -> T.mkdir $ T.fromText $ Text.pack $ homedir ++ "/.themes"
-            -- if icons dir does not exist
-            -- iconsExists <- S.doesDirectoryExist $ homedir ++ "/.icons"
-            -- case iconsExists of 
-                -- True -> print "Icons file exists"
-                -- False -> T.mkdir $ T.fromText $ Text.pack $ homedir ++ "/.icons"
-            -- changeGTKTheme dat
-            -- changeShellTheme dat
-            -- changeIconTheme dat
-            -- print $ "Changed wallpaper to " ++ wpaper
+    case gtk of
+        Left g_err -> error g_err 
+        Right g_wall -> do 
+            wpaper <- wallpaperCheck g_wall
+            changeWallpaper wpaper 
+    -- if themes dir does not exist
+    themesExists <- S.doesDirectoryExist $ homedir ++ "/.themes"
+    case themesExists of 
+        True -> print "Themes file exists"
+        False -> T.mkdir $ T.fromText $ Text.pack $ homedir ++ "/.themes"
+    -- if icons dir does not exist
+    iconsExists <- S.doesDirectoryExist $ homedir ++ "/.icons"
+    case iconsExists of 
+        True -> print "Icons file exists"
+        False -> T.mkdir $ T.fromText $ Text.pack $ homedir ++ "/.icons"
+    case gtk of 
+        Left g_err -> error g_err
+        Right g_dat -> do
+            changeGTKTheme g_dat 
+            changeShellTheme g_dat 
+            changeIconTheme g_dat
+    print $ "Changed stuff"
 
     -- parse and execute sublime text aesthetic
-    -- let sublime = (parseAesthetic s) :: Either String SublimeAesthetic
-    -- case sublime of
-        -- Left s_err -> putStrLn s_err
-        -- Right s_dat -> do
-            -- importConfigs (homedir ++ "/autognomy/pretty/" ++ aesFile) s_dat
-            -- print "Imported sublime text configs!"
+    case sublime of
+        Left s_err -> error s_err
+        Right s_dat -> do
+            importConfigs (homedir ++ "/autognomy/pretty/" ++ aesFile) s_dat
+            print "Imported sublime text configs!"
 
